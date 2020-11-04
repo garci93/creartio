@@ -88,7 +88,7 @@ DROP TABLE IF EXISTS comentarios CASCADE;
 
 CREATE TABLE comentarios (
       id            bigserial       PRIMARY KEY
-    , puntos        tinyint         NOT NULL
+    , puntos        smallint         NOT NULL
     , fortalezas    VARCHAR(255)    NOT NULL
     , consejos      VARCHAR(255)    NOT NULL
     , padre_id      bigint          REFERENCES comentarios(id)

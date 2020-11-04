@@ -1,0 +1,3 @@
+=== creartio Config Vars
+DATABASE_URL:              postgres://gewpqjsuxcyyky:a16b6834efeedf6ab175d05cfee3dbac68ca6cb55350c7ffa0aa7556d6b6f5a4@ec2-52-212-157-46.eu-west-1.compute.amazonaws.com:5432/deo1062a7itqdk
+HEROKU_POSTGRESQL_RED_URL: postgres://ymjbpfrawyfvdp:29608cea1974598a59ea66fc65e55a3863c18b9f43060b83f2539307e928c014@ec2-52-212-157-46.eu-west-1.compute.amazonaws.com:5432/d9umlcsjfrkg05
