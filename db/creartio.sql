@@ -6,13 +6,14 @@ DROP TABLE IF EXISTS usuarios CASCADE;
 
 CREATE TABLE usuarios (
       id            bigserial       PRIMARY KEY
-    , nombre        VARCHAR(20)     NOT NULL UNIQUE
+    , nombre        VARCHAR(255)    NOT NULL UNIQUE
     , email         VARCHAR(255)    NOT NULL
     , rol           VARCHAR(255)    NOT NULL
     , nom_completo  VARCHAR(255)    NOT NULL
     , biografia     VARCHAR(255)
     , fecha_nac     date
-    , idioma        VARCHAR(30)
+    , idioma        VARCHAR(255)
+    , password      VARCHAR(255)    NOT NULL
 );
 
 DROP TABLE IF EXISTS galerias CASCADE;
