@@ -1,0 +1,11 @@
+
+Add-on                                            Plan       Price  State
+────────────────────────────────────────────────  ─────────  ─────  ───────
+heroku-postgresql (postgresql-polished-50879)     hobby-dev  free   created
+ └─ as DATABASE
+
+heroku-postgresql (postgresql-transparent-78849)  hobby-dev  free   created
+ └─ as HEROKU_POSTGRESQL_RED
+
+The table above shows add-ons and the attachments to the current app (creartio) or other apps.
+  
