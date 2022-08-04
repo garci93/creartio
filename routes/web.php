@@ -25,3 +25,4 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 });
 
 Route::resource('usuarios',UsuarioController::class);
+Route::resource('galerias',GaleriaController::class);

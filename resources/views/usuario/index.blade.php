@@ -12,9 +12,13 @@
 				<td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold"></span>{{$usuario->nombre}}</td>
 				<td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold"></span>{{$usuario->email}}</td>
 				<td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-					<span class="inline-block w-1/3 md:hidden font-bold">Actions</span>
-					<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded">Edit</button>
-					<button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 border border-red-500 rounded">Delete</button>
+					<span class="inline-block w-1/3 md:hidden font-bold">Acciones</span>
+					<a href={{url('/usuarios/'.$usuario->id.'/edit')}} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded">Editar</a>
+					<form action="/usuarios/{{ $usuario->id }}" method="POST">
+						@csrf
+						@method('DELETE')
+						<button onclick="return confirm('¿Estás seguro?')" class="px-4 py-1 text-sm text-white bg-red-400 rounded" type="submit">Borrar</button>
+				</form>
 				</td>
             </tr>
             @endforeach
