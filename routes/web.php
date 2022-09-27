@@ -3,6 +3,7 @@
 use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PublicacionController;
+use App\Http\Controllers\ColeccionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,4 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 Route::resource('usuarios',UsuarioController::class);
 Route::resource('galerias',GaleriaController::class);
 Route::resource('publicaciones',PublicacionController::class);
+Route::resource('colecciones',ColeccionController::class);
