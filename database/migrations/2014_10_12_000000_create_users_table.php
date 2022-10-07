@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre')->unique();
             $table->string('email')->unique();
             $table->string('rol');
             $table->string('nom_completo');
@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('idioma')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('perfil',2048)->default('fotos-perfil/def-avatar.png');
             $table->rememberToken();
             $table->timestamps();
         });

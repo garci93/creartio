@@ -4,6 +4,7 @@ use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\ColeccionController;
+use App\Http\Controllers\ReporteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,4 @@ Route::resource('usuarios',UsuarioController::class);
 Route::resource('galerias',GaleriaController::class);
 Route::resource('publicaciones',PublicacionController::class);
 Route::resource('colecciones',ColeccionController::class);
+Route::resource('reportes',ReporteController::class);
