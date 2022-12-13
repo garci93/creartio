@@ -31,7 +31,7 @@
                                 href="#">Reportes</a></li>
                         <li><a href="#">
                                 <img class="h-10 w-10 rounded-full hover:scale-110 duration-150"
-                                    src="{{ url('/img/prueba-01.jpg') }}" alt="profile">
+                                    src="{{ url('https://creartio.s3.eu-west-3.amazonaws.com/fotos-perfil/def-avatar.png') }}" alt="profile">
                             </a>
                             <div>
                                 <ul>
