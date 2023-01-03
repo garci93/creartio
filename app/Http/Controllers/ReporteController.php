@@ -18,23 +18,19 @@ class ReporteController extends Controller
 
     public function index(){
 
-        //select u.nombre, r.razon, r.reportado_id
-        //from users u join reportes r on u.id = r.reportado_id;
-
-
-
-        $reportes = DB::table('users')
-            ->select('users.nombre','reportes.id','reportes.razon','reportes.reportador_id','reportes.reportado_id')
-            ->join('reportes','users.id','=','reportes.reportado_id')
-            ->join('reportes','users.id','=','reportes.reportador_id') //terminar esta consulta para poder coger el nombre del reportador
-            ->paginate(10);
+        $reportes = DB::select( DB::raw('select r.id, reportador_id, reportado_id, u.nombre as reportado, u2.nombre as reportador, r.razon, r.id
+        from reportes as r
+        join users as u
+        on r.reportado_id = u.id
+        join users as u2
+        on r.reportador_id = u2.id'));
         return view('reporte.index',['reportes' => $reportes]);
     }
 
     public function edit($id){
         $reporte = Reporte::findOrFail($id);
         $datos_reporte = DB::table('reportes')
-            ->select('reportador_id,reportado_id,razon')
+            ->select('reportado_id','razon')
             ->where('id','=',$reporte->id)
             ->get();
         return view('reporte.edit',['reporte' => $reporte,'datos_reporte' => $datos_reporte]);

@@ -13,6 +13,13 @@ class UsuarioController extends Controller
         return view('usuario.index',['usuarios' => $usuarios]);
     }
 
+    public function show($id)
+    {
+        return view('usuario.profile', [
+            'usuarios' => User::findOrFail($id)
+        ]);
+    }
+
     public function edit($id){
         $usuario = User::findOrFail($id);
         $datos_usuario = DB::table('users')

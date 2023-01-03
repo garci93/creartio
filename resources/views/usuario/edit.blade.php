@@ -10,7 +10,10 @@
 		<label for="email">Email</label>
 	</div>
 	<div>
-		<input type="text" name="rol" value={{$datos_usuario[0]->rol}}>
+        <select name="rol" default={{$datos_usuario[0]->rol}}>
+            <option value="usuario" {{$datos_usuario[0]->rol=='usuario' ? "selected" : ""}}>Usuario</option>
+            <option value="admin"{{$datos_usuario[0]->rol=='admin' ? "selected" : ""}}>Administrador</option>
+        </select>
 		<label for="rol">Rol</label>
 	</div>
 	<div>
