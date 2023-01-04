@@ -28,7 +28,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('dashboard');
 });
 
-Route::resource('usuarios',UsuarioController::class);
+Route::group(['middleware' => 'admin'], function() {
+    Route::resource('usuarios',UsuarioController::class);
+  });
 Route::resource('galerias',GaleriaController::class);
 Route::resource('publicaciones',PublicacionController::class);
 Route::resource('colecciones',ColeccionController::class);
