@@ -6,6 +6,7 @@ use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\ColeccionController;
 use App\Http\Controllers\ReporteController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,6 @@ Route::resource('galerias',GaleriaController::class);
 Route::resource('publicaciones',PublicacionController::class);
 Route::resource('colecciones',ColeccionController::class);
 Route::resource('reportes',ReporteController::class);
+
+Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
+Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
