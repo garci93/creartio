@@ -9,8 +9,8 @@
 
 <body class="font-sans antialiased">
     @livewireScripts
-    <nav id="header" class="w-full z-30 top-10 py-1 bg-white shadow-lg border-b border-blue-400 mt-24">
-        <div class="w-full flex items-center justify-between mt-0 px-6 py-2">
+    <nav id="header" class="z-30 top-10 py-1 bg-white shadow-lg border-b border-blue-400">
+        <div class="flex items-center justify-items-end justify-between mt-0 px-6 py-2 mr-auto">
             <label for="menu-toggle" class="cursor-pointer md:hidden block">
                 <svg class="fill-current text-blue-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                     viewBox="0 0 20 20">
@@ -20,9 +20,12 @@
             </label>
             <input class="hidden" type="checkbox" id="menu-toggle">
 
-            <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
-                <nav>
+            <img class="h-16 mx-auto" src="{{ url('https://creartio.s3.eu-west-3.amazonaws.com/layout/logo-400-white.png') }}" alt="profile">
+
+            <div class="hidden md:flex md:ml-auto md:items-center justify-items-end md:w-auto w-full order-3 md:order-1" id="menu">
+                <nav class="justify-items-end mr-auto">
                     <ul class="md:flex items-center justify-between text-base text-blue-600 pt-4 md:pt-0">
+                        @auth
                         <li><a class="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
                                 href="#">Inicio</a></li> <!-- To do: cambiar por el logotipo de Creartio -->
                         <li><a href="#">
@@ -32,18 +35,17 @@
                             <div>
                                 <ul>
                                     <li><a class="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                                            href="#">Mi perfil</a></li>
-                                    @auth
+                                            href="/user/profile">Mi perfil</a></li>
                                         <li>
                                             @if (Auth::user()->rol == 'admin')
                                                 <a class="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                                                    href="#">Gestión de reportes</a>
+                                                    href="/reportes">Gestión de reportes</a>
                                             @endif
                                         </li>
-                                    @endauth
                                 </ul>
                             </div>
                         </li>
+                        @endauth
                         <li>
                             <a href="">
                                 @auth

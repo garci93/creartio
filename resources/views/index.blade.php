@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-footer-layout>
     <div class="">
         <br>
         <img class="w-1/2 mx-auto" src="{{ url('https://creartio.s3.eu-west-3.amazonaws.com/layout/logo-400-white.png') }}" alt="profile">
@@ -13,8 +13,15 @@
             <a class="flex mx-auto items-center bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-gray-100"
                                                 href="/register">Regístrate</a>
         </div>
-                                                <br>
-                                                <br>
+        <br>
+        <p class="text-center text-lg">O si ya tienes una cuenta...</p>
+        <br>
+        <div class="flex mx-auto items-center">
+            <a class="flex mx-auto items-center bg-transparent text-gray-800  p-2 rounded border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                                                href="/login">Inicia sesión</a>
+        </div>
+        <br>
+        <br>
     </div>
 
-</x-app-layout>
+</x-footer-layout>
