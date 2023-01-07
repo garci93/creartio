@@ -17,7 +17,6 @@ class CreateArchivosTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('extension', 10);
-            $table->foreignId('publicacion_id')->constrained('publicaciones')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class CreatePublicacionesTable extends Migration
             $table->string('titulo', 40);
             $table->string('texto')->nullable();
             //$table->foreignId('colaborador_id')->constrained('users')->onDelete('null')->nullable(); //Añadir más adelante con migración
+            $table->foreignId('archivo_id')->constrained('archivos')->onDelete('cascade');
             $table->timestamp('fecha_publicacion');
             $table->timestamp("fecha_ultima_edicion")->nullable();
         });
