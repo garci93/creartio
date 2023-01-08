@@ -20,7 +20,7 @@
             </label>
             <input class="hidden" type="checkbox" id="menu-toggle">
 
-            <img class="h-16 mx-auto" src="{{ url('https://creartio.s3.eu-west-3.amazonaws.com/layout/logo-400-white.png') }}" alt="profile">
+            <img class="h-16 mx-auto" src="{{Storage::disk('s3')->url('layout/logo-400-white.png')}}" alt="profile">
 
             <div class="hidden md:flex md:ml-auto md:items-center justify-items-end md:w-auto w-full order-3 md:order-1" id="menu">
                 <nav class="justify-items-end mr-auto">
@@ -29,8 +29,7 @@
                         <li><a class="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
                                 href="#">Inicio</a></li> <!-- To do: cambiar por el logotipo de Creartio -->
                         <li><a href="#">
-                                <img class="h-10 w-10 rounded-full hover:scale-110 duration-150"
-                                    src="{{ url('https://creartio.s3.eu-west-3.amazonaws.com/fotos-perfil/def-avatar.png') }}" alt="profile">
+                                <img class="h-10 w-10 rounded-full hover:scale-110 duration-150" src="{{Storage::disk('s3')->url('fotos-perfil/def-avatar.png')}}" alt="profile">
                             </a>
                             <div>
                                 <ul>

@@ -1,7 +1,7 @@
 <x-footer-layout>
     <div class="">
         <br>
-        <img class="w-1/2 mx-auto" src="{{ url('https://creartio.s3.eu-west-3.amazonaws.com/layout/logo-400-white.png') }}" alt="profile">
+        <img class="w-1/2 mx-auto" src="{{Storage::disk('s3')->url('layout/logo-400-white.png')}}" alt="profile">
         <br>
         <h1 class="text-center text-2xl">Crea. Comparte. Inspira.</h1>
         <br>
