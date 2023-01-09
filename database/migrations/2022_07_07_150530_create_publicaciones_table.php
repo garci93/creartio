@@ -15,7 +15,7 @@ class CreatePublicacionesTable extends Migration
     {
         Schema::create('publicaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo', 40);
+            $table->string('titulo', 40)->unique();
             $table->string('texto')->nullable();
             //$table->foreignId('colaborador_id')->constrained('users')->onDelete('null')->nullable(); //Añadir más adelante con migración
             $table->foreignId('archivo_id')->constrained('archivos')->onDelete('cascade');

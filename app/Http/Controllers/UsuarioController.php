@@ -13,12 +13,18 @@ class UsuarioController extends Controller
         return view('usuario.index',['usuarios' => $usuarios]);
     }
 
-    public function show($id)
+    /*public function show($id)
     {
         return view('usuario.profile', [
             'usuarios' => User::findOrFail($id)
         ]);
     }
+
+    public function show($id)
+    {
+        $Agenda= Agenda::findOrFail($id);
+        return view('agenda.show', compact('Agenda'));
+    }*/
 
     public function edit($id){
         $usuario = User::findOrFail($id);

@@ -26,8 +26,6 @@
                 <nav class="justify-items-end mr-auto">
                     <ul class="md:flex items-center justify-between text-base text-blue-600 pt-4 md:pt-0">
                         @auth
-                        <li><a class="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                                href="#">Inicio</a></li> <!-- To do: cambiar por el logotipo de Creartio -->
                         <li><a href="#">
                                 <img class="h-10 w-10 rounded-full hover:scale-110 duration-150" src="{{Storage::disk('s3')->url('fotos-perfil/def-avatar.png')}}" alt="profile">
                             </a>

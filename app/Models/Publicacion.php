@@ -19,4 +19,9 @@ class Publicacion extends Model
         'texto',
     ];
 
+    public function archivo ()
+        {
+            return $this->hasOne(Archivo::class, 'id', 'archivo_id');
+        }
+
 }

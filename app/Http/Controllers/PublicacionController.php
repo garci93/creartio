@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Publicacion;
 use Carbon\Carbon;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -41,11 +42,21 @@ class PublicacionController extends Controller
 
     public function store(Request $request){
         $publicacion = new Publicacion($request->input());
+        dd($request->image);
         DB::table('publicaciones')
             ->insert(
                 ['titulo' => $publicacion->titulo,
                 'texto' => $publicacion->texto,
                 'fecha_publicacion' => Carbon::now()]);
         return redirect('/publicaciones')->with(["mensaje" => "Publicación creada",]);
+    }
+
+    public function show($id){
+        $publicacion = Publicacion::with('archivo')->findOrFail($id);
+        $datos_publicacion = DB::table('publicaciones')
+            ->select('titulo','texto')
+            ->where('id','=',$publicacion->id)
+            ->get();
+        return view('publicacion.show',['publicacion' => $publicacion,'datos_publicacion' => $datos_publicacion]);
     }
 }

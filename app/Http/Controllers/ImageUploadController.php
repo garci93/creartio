@@ -35,10 +35,11 @@ class ImageUploadController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], $customMessages);
 
-        $imageName = time().'.'.$request->image->extension();
-
-        $path = Storage::disk('s3')->put('images', $request->image);
+        $imageName = 'images/'.$request->image->hashName();
+        $path = Storage::disk('s3')->put($imageName, $request->image);
         $path = Storage::disk('s3')->url($path);
+
+        dd($request->image);
 
         /* Store $imageName name in DATABASE from HERE */
 
