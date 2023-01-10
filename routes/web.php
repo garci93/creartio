@@ -31,11 +31,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 Route::group(['middleware' => 'admin'], function() {
     Route::resource('usuarios',UsuarioController::class);
+    Route::resource('reportes',ReporteController::class);
   });
-Route::resource('galerias',GaleriaController::class);
-Route::resource('publicaciones',PublicacionController::class);
-Route::resource('colecciones',ColeccionController::class);
-Route::resource('reportes',ReporteController::class);
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('galerias',GaleriaController::class);
+    Route::resource('publicaciones',PublicacionController::class);
+    Route::resource('colecciones',ColeccionController::class);
+    Route::resource('reportes',ReporteController::class,['only' => ['create']]);
+});
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');

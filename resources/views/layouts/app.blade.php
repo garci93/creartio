@@ -87,7 +87,7 @@
     <main>
         {{ $slot }}
     </main>
-    <footer class="footer relative pt-1 " style="background-color:#202124">
+    <footer class="footer relative pt-1 " style="background-color:#161819">
         <div class="container mx-auto px-6">
 
             <div class="sm:flex sm:mt-8">
