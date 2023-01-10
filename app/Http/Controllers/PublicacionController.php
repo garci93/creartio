@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archivo;
 use App\Models\Publicacion;
 use Carbon\Carbon;
 use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PublicacionController extends Controller
@@ -42,12 +44,26 @@ class PublicacionController extends Controller
 
     public function store(Request $request){
         $publicacion = new Publicacion($request->input());
-        dd($request->image);
+        $archivo = new Archivo($request->input());
+        $nombre_nuevo = Auth::user()->nombre . "-" . $publicacion->titulo;
+        DB::table('archivos')
+            ->insert(
+                ['nombre' => $nombre_nuevo,
+                'extension' => $request->image->extension(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),]);
+        $archivo_id = DB::table('archivos')
+            ->select('id')
+            ->where('nombre','=',$nombre_nuevo)
+            ->get();
+        app('App\Http\Controllers\ImageUploadController')->imageUploadPost($request,$nombre_nuevo);
         DB::table('publicaciones')
             ->insert(
                 ['titulo' => $publicacion->titulo,
                 'texto' => $publicacion->texto,
-                'fecha_publicacion' => Carbon::now()]);
+                'archivo_id' => $archivo_id[0]->id,
+                'fecha_publicacion' => Carbon::now(),
+                'fecha_ultima_edicion' => Carbon::now()]);
         return redirect('/publicaciones')->with(["mensaje" => "Publicación creada",]);
     }
 

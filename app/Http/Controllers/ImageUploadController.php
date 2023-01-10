@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Publicacion;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Expr\Cast\String_;
 
 class ImageUploadController extends Controller
 {
@@ -24,7 +29,7 @@ class ImageUploadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function imageUploadPost(Request $request)
+    public function imageUploadPost(Request $request, String $nombre_nuevo)
     {
         $customMessages = [
             'required' => 'No se ha subido ningún archivo.',
@@ -35,11 +40,19 @@ class ImageUploadController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], $customMessages);
 
-        $imageName = 'images/'.$request->image->hashName();
-        $path = Storage::disk('s3')->put($imageName, $request->image);
-        $path = Storage::disk('s3')->url($path);
+        $datos_usuario = DB::table('users')
+            ->select('nombre')
+            ->where('id','=',Auth::user()->id)
+            ->get();
 
-        dd($request->image);
+        // $datos_publicacion = DB::table('publicaciones')
+        //     ->select('titulo')
+
+
+        $imageNameOld = time().'.'.$request->image->extension();
+        $imageNameNew = $nombre_nuevo.'.'.$request->image->extension();
+        $path = Storage::disk('s3')->put('images', $request->image);
+        Storage::disk('s3')->move($path, 'images/'.$imageNameNew);
 
         /* Store $imageName name in DATABASE from HERE */
 

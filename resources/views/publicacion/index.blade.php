@@ -1,24 +1,31 @@
 <x-app-layout>
-    <table class="min-w-full border-collapse block md:table">
-		<thead class="block md:table-header-group">
-			<tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
-				<th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Nombre</th>
-				<th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Autor</th>
-			</tr>
+    <table class="grid justify-items-center px-40">
+		<thead class="w-full grid justify-items-center">
+			{{-- <tr class="w-full border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
+				<th class="w-1/4 bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Nombre</th>
+				<th class="w-1/4 bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Autor</th>
+				<th class="w-1/4 bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Imagen</th>
+				<th class="w-1/4 bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Acciones</th>
+			</tr> --}}
 		</thead>
 		<tbody class="block md:table-row-group">
-			<tr class="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
+			<tr class="h-1/2 bg-gray-300 border border-grey-500 md:border-none block md:table-row">
                 @foreach($publicaciones as $publicacion)
-				<td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold"></span>{{$publicacion->titulo}}</td>
-				<td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span class="inline-block w-1/3 md:hidden font-bold"></span>{{$publicacion->texto}}</td>
-				<td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-					<span class="inline-block w-1/3 md:hidden font-bold">Acciones</span>
-					<a href={{url('/publicaciones/'.$publicacion->id.'/edit')}} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded">Editar</a>
+				<td class="w-1/4 p-2 md:border md:border-grey-500 text-left block md:table-cell">
+                    <span class="inline-block w-1/4 md:hidden font-bold"></span>{{$publicacion->titulo}}</td>
+				<td class="w-1/4 p-2 md:border md:border-grey-500 text-left block md:table-cell">
+                    <span class="inline-block w-1/4 md:hidden font-bold"></span>{{$publicacion->texto}}</td>
+				<td class="w-1/4  p-2 md:border md:border-grey-500 text-left block md:table-cell">
+                    <a href={{url('/publicaciones/'.$publicacion->id)}}>
+                        <img class="h-full" src={{Storage::disk('s3')->url('images/'.$publicacion->archivo->nombre.'.'.$publicacion->archivo->extension)}} alt="">
+                    </a>
+				<td class="w-1/4 p-2 md:border md:border-grey-500 text-left block md:table-cell">
+					<a href={{url('/publicaciones/'.$publicacion->id.'/edit')}} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">Editar</a>
 					<form action="/publicaciones/{{ $publicacion->id }}" method="POST">
 						@csrf
 						@method('DELETE')
-						<button onclick="return confirm('¿Estás seguro?')" class="px-4 py-1 text-sm text-white bg-red-400 rounded" type="submit">Borrar</button>
-				</form>
+						<button onclick="return confirm('¿Estás seguro?')" class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-2 rounded" type="submit">Borrar</button>
+				    </form>
 				</td>
             </tr>
             @endforeach

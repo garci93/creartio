@@ -34,7 +34,6 @@
 
         <form action="{{ route('image.upload.post') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            {{-- {{dd("imageupload");}} --}}
             <div class="row">
 
                 <div class="col-md-6">
