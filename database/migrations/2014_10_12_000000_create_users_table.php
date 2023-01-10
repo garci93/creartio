@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre')->unique();
             $table->string('email')->unique();
-            $table->string('rol');
+            $table->string('rol')->default('normal');
             $table->string('nom_completo');
             $table->string('biografia')->nullable();
             $table->string('idioma')->nullable();
