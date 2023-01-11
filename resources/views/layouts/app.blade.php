@@ -20,7 +20,9 @@
             </label>
             <input class="hidden" type="checkbox" id="menu-toggle">
 
-            <img class="h-16 mx-auto" src="{{Storage::disk('s3')->url('layout/logo-400-white.png')}}" alt="profile">
+            <a href="/publicaciones">
+                <img class="h-16 mx-auto" src="{{Storage::disk('s3')->url('layout/logo-400-white.png')}}" alt="profile">
+            </a>
 
             <div class="hidden md:flex md:ml-auto md:items-center justify-items-end md:w-auto w-full order-3 md:order-1" id="menu">
                 <nav class="justify-items-end mr-auto">

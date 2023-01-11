@@ -24,4 +24,9 @@ class Publicacion extends Model
             return $this->hasOne(Archivo::class, 'id', 'archivo_id');
         }
 
+    public function comentarios()
+        {
+            return $this->hasMany(Comentario::class)->whereNull('padre_id');
+        }
+
 }

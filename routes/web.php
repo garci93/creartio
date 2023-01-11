@@ -4,6 +4,7 @@ use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\ColeccionController;
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ReporteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageUploadController;
@@ -36,6 +37,7 @@ Route::group(['middleware' => 'admin'], function() {
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('galerias',GaleriaController::class);
     Route::resource('publicaciones',PublicacionController::class);
+    Route::resource('comentarios',ComentarioController::class);
     Route::resource('colecciones',ColeccionController::class);
     Route::resource('reportes',ReporteController::class,['only' => ['create']]);
 });

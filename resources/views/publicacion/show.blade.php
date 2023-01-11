@@ -12,5 +12,21 @@
                     </div>
         <h1 class="text-2xl pt-10">{{$datos_publicacion[0]->titulo}}</h1>
         <p class="py-10">{{$datos_publicacion[0]->texto}}</p>
+        <h4>Display Comments</h4>
+
+                    @include('publicacion.mostrarComentarios', ['comentarios' => $publicacion->comentarios, 'publicacion_id' => $publicacion->id])
+                    <hr>
+                    <h4>Add comment</h4>
+
+                    <form method="POST" action="{{ route('comentarios.store'   ) }}">
+                        @csrf
+                        <div class="form-group">
+                            <textarea class="form-control" name="body"></textarea>
+                            <input type="hidden" name="publicacion_id" value="{{ $publicacion->id }}" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success" value="Add Comment" />
+                        </div>
+                    </form>
     </div>
 </x-app-layout>

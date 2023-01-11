@@ -9,11 +9,19 @@ class Comentario extends Model
 {
     use HasFactory;
 
-    protected $table = "recomendaciones";
+    protected $table = "comentarios";
 
     protected $fillable = [
+
         'puntos',
         'fortalezas',
         'consejos',
+        'padre_id',
+        'publicacion_id',
     ];
+
+    public function comentarios()
+        {
+            return $this->hasMany(Comentario::class)->whereNull('padre_id');
+        }
 }
