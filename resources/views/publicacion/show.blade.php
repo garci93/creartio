@@ -16,7 +16,7 @@
 
                     @include('publicacion.mostrarComentarios', ['comentarios' => $publicacion->comentarios, 'publicacion_id' => $publicacion->id])
                     <hr>
-                    <h4>Add comment</h4>
+                    <h4>Añadir comentario</h4>
 
                     <form method="POST" action="{{ route('comentarios.store'   ) }}">
                         @csrf
