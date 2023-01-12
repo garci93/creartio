@@ -61,6 +61,7 @@ class PublicacionController extends Controller
             ->insert(
                 ['titulo' => $publicacion->titulo,
                 'texto' => $publicacion->texto,
+                'usuario_id' => $publicacion->usuario_id,
                 'archivo_id' => $archivo_id[0]->id,
                 'fecha_publicacion' => Carbon::now(),
                 'fecha_ultima_edicion' => Carbon::now()]);
@@ -70,9 +71,13 @@ class PublicacionController extends Controller
     public function show($id){
         $publicacion = Publicacion::with('archivo')->findOrFail($id);
         $datos_publicacion = DB::table('publicaciones')
-            ->select('titulo','texto')
+            ->select('titulo','texto','usuario_id')
             ->where('id','=',$publicacion->id)
             ->get();
-        return view('publicacion.show',['publicacion' => $publicacion,'datos_publicacion' => $datos_publicacion]);
+        $datos_usuario = DB::table('users')
+            ->select('nombre')
+            ->where('id','=',$publicacion->usuario_id)
+            ->get();
+        return view('publicacion.show',['publicacion' => $publicacion,'datos_publicacion' => $datos_publicacion,'datos_usuario' => $datos_usuario]);
     }
 }

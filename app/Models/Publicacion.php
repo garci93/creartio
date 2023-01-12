@@ -17,6 +17,7 @@ class Publicacion extends Model
     protected $fillable = [
         'titulo',
         'texto',
+        'usuario_id',
     ];
 
     public function archivo ()
@@ -28,5 +29,10 @@ class Publicacion extends Model
         {
             return $this->hasMany(Comentario::class)->whereNull('padre_id');
         }
+
+    public function usuario ()
+    {
+        return $this->hasOne(User::class, 'id', 'usuario_id');
+    }
 
 }

@@ -40,13 +40,13 @@
                         <a class="inline-block pr-4" href="#">
                             <img class="h-12 mx-auto rounded-full hover:scale-110 duration-150" src="{{Storage::disk('s3')->url('fotos-perfil/def-avatar.png')}}" alt="profile">
                         </a>
-                        {{-- <form class="inline-block" action="{{ route('logout') }}" method="post">
+                        <form class="inline-block" action="{{ route('logout') }}" method="post">
                             @csrf
-                            <a class="md:items-center inline-block bg-transparent text-gray-800 py-2 px-2 rounded border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                            <a class="inline align-middle no-underline hover:text-black font-medium text-md pt-2 pb-10 px-4 lg:-ml-2"
                                 href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); this.closest('form').submit();"
                                 role="button">Cerrar sesión</a>
-                        </form> --}}
+                        </form>
                     @endauth
                     {{-- <a href="">
                         <div class="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4"

@@ -26,6 +26,7 @@
             <br>
             <input class="m-1 border" type="text" name="titulo">
             <label for="titulo">Titulo</label>
+            <input class="hidden m-1 border" value={{ auth()->user()->id }} type="text" name="usuario_id">
             <br>
             <input class="m-1 border" type="text" name="texto">
             <label for="texto">Texto</label>

@@ -1,16 +1,22 @@
 <x-app-layout>
     <div class="grid justify-items-center px-40">
         <img class="mx-auto" src="{{Storage::disk('s3')->url('images/'.$publicacion->archivo->nombre.'.'.$publicacion->archivo->extension)}}" alt="profile">
-        <span class="inline-block w-1/4 md:hidden font-bold">Acciones</span>
-					<div class="flex">
+        @auth
+                @if (Auth::user()->rol == 'admin' || Auth::user()->id == $publicacion->usuario_id)
+                    <span class="inline-block w-1/4 md:hidden font-bold">Acciones</span>
+                    <div class="flex">
                         <a href={{url('/publicaciones/'.$publicacion->id.'/edit')}} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">Editar</a>
-					<form action="/publicaciones/{{ $publicacion->id }}" method="POST">
-						@csrf
-						@method('DELETE')
-						<button onclick="return confirm('¿Estás seguro?')" class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-2 rounded" type="submit">Borrar</button>
-				    </form>
+                    <form action="/publicaciones/{{ $publicacion->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button onclick="return confirm('¿Estás seguro?')" class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-2 rounded" type="submit">Borrar</button>
+                    </form>
                     </div>
+                @endif
+            @endauth
+
         <h1 class="text-2xl pt-10">{{$datos_publicacion[0]->titulo}}</h1>
+        <h1 class="text-xl pt-10">{{$datos_usuario[0]->nombre}}</h1>
         <p class="py-10">{{$datos_publicacion[0]->texto}}</p>
         <h4>Display Comments</h4>
 
