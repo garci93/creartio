@@ -44,9 +44,10 @@
             </div>
         </div>
         <div class="container mx-auto px-6">
-            <div class="mt-16 flex flex-col items-center">
+            <div class="flex flex-col items-center">
                 <div class="sm:w-2/3 text-center py-6">
-                    <p class="text-sm text-blue-700 font-bold mb-2">
+                    <p class="text-md text-white mb-2">
+                        Creartio © 2023
                     </p>
                 </div>
             </div>

@@ -9,10 +9,10 @@
 
 <body class="font-sans antialiased">
     @livewireScripts
-    <nav id="header" class="z-30 top-10 py-1 bg-white shadow-lg border-b border-blue-400">
-        <div class="flex items-center justify-items-end justify-between mt-0 px-6 py-2 mr-auto">
+    <nav id="header" class="z-30 bg-white shadow-lg border-b border-cyan-400">
+        <div class="flex items-center justify-items-end justify-between mt-0 py-2 px-6 mr-auto">
             <label for="menu-toggle" class="cursor-pointer md:hidden block">
-                <svg class="fill-current text-blue-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                <svg class="fill-current text-cyan-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                     viewBox="0 0 20 20">
                     <title>menu</title>
                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
@@ -21,65 +21,48 @@
             <input class="hidden" type="checkbox" id="menu-toggle">
 
             <a href="/publicaciones">
-                <img class="h-16 mx-auto" src="{{Storage::disk('s3')->url('layout/logo-400-white.png')}}" alt="profile">
+                <img class="inline h-12 mx-auto" src="{{Storage::disk('s3')->url('layout/logo-400-white.png')}}" alt="profile">
             </a>
+            @auth
+                @if (Auth::user()->rol == 'admin')
+                    <a class="inline no-underline hover:text-black font-medium text-lg px-4 lg:-ml-2"
+                        href="/reportes">Gestión de reportes</a>
+                @endif
+            @endauth
 
-            <div class="hidden md:flex md:ml-auto md:items-center justify-items-end md:w-auto w-full order-3 md:order-1" id="menu">
-                <nav class="justify-items-end mr-auto">
-                    <ul class="md:flex items-center justify-between text-base text-blue-600 pt-4 md:pt-0">
-                        @auth
-                        <li><a href="#">
-                                <img class="h-10 w-10 rounded-full hover:scale-110 duration-150" src="{{Storage::disk('s3')->url('fotos-perfil/def-avatar.png')}}" alt="profile">
-                            </a>
-                            <div>
-                                <ul>
-                                    <li><a class="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                                            href="/user/profile">Mi perfil</a></li>
-                                        <li>
-                                            @if (Auth::user()->rol == 'admin')
-                                                <a class="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                                                    href="/reportes">Gestión de reportes</a>
-                                            @endif
-                                        </li>
-                                </ul>
-                            </div>
-                        </li>
-                        @endauth
-                        <li>
-                            <a href="">
-                                @auth
-                                    <div class="auth flex items-center w-full md:w-full">
+            <div id="menu" class="hidden md:flex md:ml-auto md:items-center justify-end md:w-auto w-full order-2 md:order-1">
+                <nav class="inline justify-end">
+                    @auth
+                        <a class="inline align-middle no-underline text-cyan-600 hover:text-cyan-400 box-border text-lg font-bold pt-2 pb-10 px-2 rounded"
+                            href={{url('/publicaciones/create')}}>Nueva publicación</a>
+                        <a class="inline align-middle no-underline hover:text-black font-medium text-lg pt-2 pb-10 px-4 lg:-ml-2"
+                            href="/user/profile">Mi perfil</a>
+                        <a class="inline-block pr-4" href="#">
+                            <img class="h-12 mx-auto rounded-full hover:scale-110 duration-150" src="{{Storage::disk('s3')->url('fotos-perfil/def-avatar.png')}}" alt="profile">
+                        </a>
+                        {{-- <form class="inline-block" action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <a class="md:items-center inline-block bg-transparent text-gray-800 py-2 px-2 rounded border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+                                href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); this.closest('form').submit();"
+                                role="button">Cerrar sesión</a>
+                        </form> --}}
+                    @endauth
+                    {{-- <a href="">
+                        <div class="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4"
+                            id="nav-content">
 
-                                        <form action="{{ route('logout') }}" method="post">
-                                            @csrf
-                                            <a class="bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700"
-                                                href="{{ route('logout') }}"
-                                                onclick="event.preventDefault(); this.closest('form').submit();"
-                                                role="button">Cerrar
-                                                sesión</a>
-                                        </form>
-                                    </div>
-                                @endauth
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <div class="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4"
-                                    id="nav-content">
-
-                                    @guest
-                                        <div class="auth flex items-center w-full md:w-full">
-                                            <a class="bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700"
-                                                href="/login">Iniciar sesión</a>
-                                            <a class="bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-gray-100"
-                                                href="/register">Regístrate</a>
-                                        </div>
-                                    @endguest
-
+                            @guest
+                                <div class="auth flex items-center w-full md:w-full">
+                                    <a class="bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700"
+                                        href="/login">Iniciar sesión</a>
+                                    <a class="bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-gray-100"
+                                        href="/register">Regístrate</a>
                                 </div>
-                            </a>
-                        </li>
-                    </ul>
+                            @endguest
+
+                        </div>
+                    </a> --}}
                 </nav>
             </div>
 
@@ -121,9 +104,10 @@
             </div>
         </div>
         <div class="container mx-auto px-6">
-            <div class="mt-16 flex flex-col items-center">
+            <div class="flex flex-col items-center">
                 <div class="sm:w-2/3 text-center py-6">
-                    <p class="text-sm text-blue-700 font-bold mb-2">
+                    <p class="text-md text-white mb-2">
+                        Creartio © 2023
                     </p>
                 </div>
             </div>
