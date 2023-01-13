@@ -19,7 +19,7 @@ class CreateComentariosTable extends Migration
             $table->string('fortalezas');
             $table->string('consejos');
             $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('padre_id')->constrained('comentarios')->onDelete('cascade');
+            // $table->foreignId('padre_id')->constrained('comentarios')->onDelete('cascade')->nullable();
             $table->foreignId('publicacion_id')->constrained('publicaciones')->onDelete('cascade');
             $table->timestamps();
         });

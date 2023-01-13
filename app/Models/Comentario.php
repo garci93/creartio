@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,12 +17,12 @@ class Comentario extends Model
         'puntos',
         'fortalezas',
         'consejos',
-        'padre_id',
         'publicacion_id',
+        'usuario_id',
     ];
 
-    public function comentarios()
+    public function usuario()
         {
-            return $this->hasMany(Comentario::class)->whereNull('padre_id');
+            return $this->belongsTo(User::class, 'usuario_id');
         }
 }

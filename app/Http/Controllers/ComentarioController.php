@@ -19,6 +19,7 @@ class ComentarioController extends Controller
         $input = $request->all();
         $input['usuario_id'] = auth()->user()->id;
 
+
         Comentario::create($input);
 
         return back();

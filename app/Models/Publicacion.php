@@ -27,7 +27,7 @@ class Publicacion extends Model
 
     public function comentarios()
         {
-            return $this->hasMany(Comentario::class)->whereNull('padre_id');
+            return $this->hasMany(Comentario::class);
         }
 
     public function usuario ()

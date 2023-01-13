@@ -78,6 +78,10 @@ class PublicacionController extends Controller
             ->select('nombre')
             ->where('id','=',$publicacion->usuario_id)
             ->get();
-        return view('publicacion.show',['publicacion' => $publicacion,'datos_publicacion' => $datos_publicacion,'datos_usuario' => $datos_usuario]);
+        $comentarios = DB::table('comentarios')
+            ->select('puntos','fortalezas','consejos','usuario_id')
+            ->where('publicacion_id','=',$publicacion->id)
+            ->get();
+        return view('publicacion.show',['publicacion' => $publicacion,'datos_publicacion' => $datos_publicacion,'datos_usuario' => $datos_usuario, 'comentarios' => $comentarios]);
     }
 }
