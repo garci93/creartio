@@ -19,8 +19,9 @@
         <h1 class="text-xl pt-10">{{$datos_usuario[0]->nombre}}</h1>
         <p class="py-10">{{$datos_publicacion[0]->texto}}</p>
         {{-- <h4>Mostrar comentarios</h4> --}}
-
-        @include('publicacion.mostrarComentarios', ['comentarios' => $publicacion->comentarios, 'publicacion_id' => $publicacion->id])
+        <div class="w-1/2">
+            @include('publicacion.mostrarComentarios', ['comentarios' => $publicacion->comentarios, 'publicacion_id' => $publicacion->id])
+        </div>
         <hr>
         {{-- <h4>Añadir comentario</h4> --}}
 

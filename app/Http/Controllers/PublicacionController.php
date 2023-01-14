@@ -18,7 +18,7 @@ class PublicacionController extends Controller
     }
 
     public function index(){
-        $publicaciones = Publicacion::paginate(10);
+        $publicaciones = Publicacion::paginate(20);
         return view('publicacion.index',['publicaciones' => $publicaciones]);
     }
 

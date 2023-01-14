@@ -4,7 +4,7 @@
     @endif
     @foreach($comentarios as $comentario)
 
-        <div class="mostrar-comentario">
+        <div class="w-full mostrar-comentario">
             {{-- <div class="mostrar-comentario" @if($comentario->padre_id != null) style="margin-left:40px;" @endif> --}}
             <strong>{{ $comentario->usuario->nombre }}</strong>
             <p class="text-yellow-600 pr-4">
