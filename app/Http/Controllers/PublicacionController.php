@@ -18,7 +18,7 @@ class PublicacionController extends Controller
     }
 
     public function index(){
-        $publicaciones = Publicacion::paginate(20);
+        $publicaciones = Publicacion::orderBy('id','desc')->simplePaginate(5);
         return view('publicacion.index',['publicaciones' => $publicaciones]);
     }
 

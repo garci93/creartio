@@ -13,13 +13,26 @@ class UsuarioController extends Controller
         return view('usuario.index',['usuarios' => $usuarios]);
     }
 
-    /*public function show($id)
+    public function show($nombre)
     {
         return view('usuario.profile', [
-            'usuarios' => User::findOrFail($id)
+            'usuarios' => User::findOrFail($nombre)
         ]);
     }
 
+    public function profile (Request $request, $nombre)
+    {
+        $usuario=User::where('nombre',$nombre)->first();
+
+
+        if (isset($usuario))
+        {
+            return view('usuario.profile',['usuario' => $usuario]);
+        }
+        return redirect('/')->with('danger','Usuario no encontrado');
+        // return "Usuario no encontrado";
+    }
+/*
     public function show($id)
     {
         $Agenda= Agenda::findOrFail($id);
