@@ -14,6 +14,4 @@
     <div class="w-2/12 mx-auto pb-10">
         {{ $publicaciones->links() }}
     </div>
-
-    {{-- {{ dd($publicaciones->links()) }} --}}
 </x-app-layout>

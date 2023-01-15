@@ -37,7 +37,7 @@
                             href={{url('/publicaciones/create')}}>Nueva publicación</a>
                         <a class="inline align-middle no-underline hover:text-black font-medium text-lg pt-2 pb-10 px-4 lg:-ml-2"
                             href="/user/profile">Mi perfil</a>
-                        <a class="inline-block pr-4" href="#">
+                        <a class="inline-block pr-4" href="/profile/{{Auth::user()->nombre}}">
                             <img class="h-12 mx-auto rounded-full hover:scale-110 duration-150" src="{{Storage::disk('s3')->url('fotos-perfil/def-avatar.png')}}" alt="profile">
                         </a>
                         <form class="inline-block" action="{{ route('logout') }}" method="post">

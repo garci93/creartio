@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Publicacion;
 use App\Models\User;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
     public function index(){
-        $usuarios = User::paginate(10);
+        $usuarios = User::simplePaginate(10);
         return view('usuario.index',['usuarios' => $usuarios]);
     }
 
@@ -22,12 +24,14 @@ class UsuarioController extends Controller
 
     public function profile (Request $request, $nombre)
     {
-        $usuario=User::where('nombre',$nombre)->first();
-
-
+        $usuario=User::where('nombre','=',$nombre)->first();
+        $publicaciones=DB::table('publicaciones')
+        ->join('archivos','publicaciones.archivo_id','=','archivos.id')
+        ->where('usuario_id','=',$usuario->id)
+        ->simplePaginate(5);
         if (isset($usuario))
         {
-            return view('usuario.profile',['usuario' => $usuario]);
+            return view('usuario.profile',['usuario' => $usuario,'publicaciones' => $publicaciones]);
         }
         return redirect('/')->with('danger','Usuario no encontrado');
         // return "Usuario no encontrado";

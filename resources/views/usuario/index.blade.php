@@ -1,4 +1,5 @@
-<table class="min-w-full border-collapse block md:table">
+<x-app-layout>
+    <table class="min-w-full border-collapse block md:table">
 		<thead class="block md:table-header-group">
 			<tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
 				<th class="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Nombre</th>
@@ -21,21 +22,8 @@
 						<button onclick="return confirm('¿Estás seguro?')" class="px-4 py-1 text-sm text-white bg-red-400 rounded" type="submit">Borrar</button>
 				</form>
 				</td>
-                <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-                    @if (Auth::user()->rol == 'admin')
-                        @if ($usuario->rol == 'admin')
-                            <a class="inline-block no-underline hover:text-black font-medium text-lg py-2 px-4 lg:-ml-2"
-                            href="#">Revocar permiso de administrador</a>
-                        @else
-                            <form action="/usuarios/darAdmin" method="POST">
-                                @csrf
-                                @method('PATCH')
-                                <button onclick="return confirm('¿Estás seguro?')" class="px-4 py-1 text-sm text-white bg-red-400 rounded" type="submit">Conceder permiso de administrador</button>
-                            </form>
-                        @endif
-                    @endif
-                </td>
             </tr>
             @endforeach
 		</tbody>
 	</table>
+</x-app-layout>

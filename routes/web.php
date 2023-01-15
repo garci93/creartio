@@ -20,9 +20,7 @@ use App\Http\Controllers\ImageUploadController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -30,17 +28,26 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('dashboard');
 });
 
+Route::get('/', function () {
+    dd("a");
+    return redirect()->to('/publicaciones');
+});
+
 Route::group(['middleware' => 'admin'], function() {
-    Route::resource('usuarios',UsuarioController::class);
     Route::resource('reportes',ReporteController::class);
+    Route::resource('usuarios',UsuarioController::class);
   });
 Route::group(['middleware' => 'auth'], function() {
-    Route::resource('galerias',GaleriaController::class);
     Route::resource('publicaciones',PublicacionController::class);
     Route::resource('comentarios',ComentarioController::class);
-    Route::resource('colecciones',ColeccionController::class);
     Route::resource('reportes',ReporteController::class,['only' => ['create']]);
+
 });
+Route::get('/', function () {
+    return view('index');
+});
+Route::any('profile/{nombre}',[UsuarioController::class,'profile'])->name('profile.index');
+
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
