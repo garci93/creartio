@@ -21,8 +21,7 @@
 		<label for="nom_completo">Nombre completo</label>
 	</div>
 	<div>
-		<input type="text" name="biografia" value={{$datos_usuario[0]->biografia}}>
-		<label for="biografia">Biografía</label>
+		<input type="hidden" name="biografia" value={{$datos_usuario[0]->biografia}}>
 	</div>
 	<div>
 		<input type="text" name="idioma" value={{$datos_usuario[0]->idioma}}>

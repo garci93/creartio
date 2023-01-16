@@ -28,34 +28,13 @@ class UsuarioController extends Controller
         $publicaciones=DB::table('publicaciones')
         ->join('archivos','publicaciones.archivo_id','=','archivos.id')
         ->where('usuario_id','=',$usuario->id)
-        ->simplePaginate(5);
+        ->simplePaginate(10);
         if (isset($usuario))
         {
             return view('usuario.profile',['usuario' => $usuario,'publicaciones' => $publicaciones]);
         }
         return redirect('/')->with('danger','Usuario no encontrado');
     }
-
-    public function coleccion (Request $request, $nombre)
-    {
-        $usuario=User::where('nombre','=',$nombre)->first();
-        $publicaciones=DB::table('publicaciones')
-        ->join('archivos','publicaciones.archivo_id','=','archivos.id')
-        ->join('colecciones','publicaciones.id','=','colecciones.publicacion_id')
-        ->where('colecciones.usuario_id','=',$usuario->id)
-        ->simplePaginate(5);
-        if (isset($usuario))
-        {
-            return view('usuario.coleccion',['usuario' => $usuario,'publicaciones' => $publicaciones]);
-        }
-        return redirect('/')->with('danger','Usuario no encontrado');
-    }
-/*
-    public function show($id)
-    {
-        $Agenda= Agenda::findOrFail($id);
-        return view('agenda.show', compact('Agenda'));
-    }*/
 
     public function edit($id){
         $usuario = User::findOrFail($id);

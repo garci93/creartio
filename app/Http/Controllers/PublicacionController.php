@@ -18,7 +18,7 @@ class PublicacionController extends Controller
     }
 
     public function index(){
-        $publicaciones = Publicacion::orderBy('id','desc')->simplePaginate(5);
+        $publicaciones = Publicacion::orderBy('id','desc')->simplePaginate(10);
         return view('publicacion.index',['publicaciones' => $publicaciones]);
     }
 
@@ -50,7 +50,7 @@ class PublicacionController extends Controller
                 ['nombre' => $nombre_nuevo,
                 'extension' => $request->image->extension(),
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),]);
+                'updated_at' => Carbon::now()]);
         $archivo_id = DB::table('archivos')
             ->select('id')
             ->where('nombre','=',$nombre_nuevo)
@@ -81,6 +81,11 @@ class PublicacionController extends Controller
             ->select('puntos','fortalezas','consejos','usuario_id')
             ->where('publicacion_id','=',$publicacion->id)
             ->get();
-        return view('publicacion.show',['publicacion' => $publicacion,'datos_publicacion' => $datos_publicacion,'datos_usuario' => $datos_usuario, 'comentarios' => $comentarios]);
+        $esta_en_coleccion = DB::table('colecciones')
+        ->where('usuario_id','=',Auth::user()->id)
+        ->where('publicacion_id','=',$id)
+        ->exists();
+        return view('publicacion.show',['publicacion' => $publicacion,
+            'datos_publicacion' => $datos_publicacion,'datos_usuario' => $datos_usuario, 'comentarios' => $comentarios,'esta_en_coleccion' => $esta_en_coleccion]);
     }
 }

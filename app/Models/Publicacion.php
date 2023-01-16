@@ -40,4 +40,9 @@ class Publicacion extends Model
         return $this->hasOne(User::class, 'id', 'usuario_id');
     }
 
+    public function colecciones()
+    {
+        return $this->hasMany(Coleccion::class);
+    }
+
 }

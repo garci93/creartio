@@ -3,9 +3,9 @@
         <img class="mx-auto" src="{{Storage::disk('s3')->url('images/'.$publicacion->archivo->nombre.'.'.$publicacion->archivo->extension)}}" alt="profile">
         @auth
                 @if (Auth::user()->rol == 'admin' || Auth::user()->id == $publicacion->usuario_id)
-                    <span class="inline-block w-1/4 md:hidden font-bold">Acciones</span>
                     <div class="flex">
-                        <a href={{url('/publicaciones/'.$publicacion->id.'/edit')}} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">Editar</a>
+                        <a href={{url('/publicaciones/'.$publicacion->id.'/edit')}}
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">Editar</a>
                     <form action="/publicaciones/{{ $publicacion->id }}" method="POST">
                         @csrf
                         @method('DELETE')

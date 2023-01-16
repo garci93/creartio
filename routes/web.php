@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ColeccionController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PublicacionController;
 use App\Http\Controllers\ComentarioController;
@@ -27,7 +28,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 });
 
 Route::get('/', function () {
-    dd("a");
     return redirect()->to('/publicaciones');
 });
 
@@ -38,6 +38,7 @@ Route::group(['middleware' => 'admin'], function() {
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('publicaciones',PublicacionController::class);
     Route::resource('comentarios',ComentarioController::class);
+    Route::resource('coleccion',ColeccionController::class);
     Route::resource('reportes',ReporteController::class,['only' => ['create']]);
 
 });

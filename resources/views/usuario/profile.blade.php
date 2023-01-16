@@ -7,8 +7,6 @@
             </h2>
         <h2 class="flex justify-center"><strong class="mr-1">Correo electrónico:</strong> {{$usuario->email}}</h2>
         <h2 class="flex justify-center"><strong class="mr-1">Nombre completo:</strong> {{$usuario->nom_completo}}</h2>
-        <h2 class="flex justify-center"><strong class="mr-1">Biografía:</strong> {{$usuario->biografia}}</h2>
-        {{-- TO DO: AVATAR --}}
     </div>
     <div class="flex justify-center mt-12">
         @if (Auth::user()->id == $usuario->id)

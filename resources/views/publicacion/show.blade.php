@@ -1,30 +1,48 @@
 <x-app-layout>
     <div class="grid justify-items-center px-40">
-        <img class="mx-auto" src="{{Storage::disk('s3')->url('images/'.$publicacion->archivo->nombre.'.'.$publicacion->archivo->extension)}}" alt="profile">
+            <img class="mb-2 mx-auto max-h-screen" src="{{Storage::disk('s3')->url('images/'.$publicacion->archivo->nombre.'.'.$publicacion->archivo->extension)}}" alt="profile">
         @auth
-                @if (Auth::user()->rol == 'admin' || Auth::user()->id == $publicacion->usuario_id)
-                    <span class="inline-block w-1/4 md:hidden font-bold">Acciones</span>
-                    <div class="flex">
-                        <a href={{url('/publicaciones/'.$publicacion->id.'/edit')}} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">Editar</a>
-                    <form action="/publicaciones/{{ $publicacion->id }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button onclick="return confirm('¿Estás seguro?')" class="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-2 rounded" type="submit">Borrar</button>
-                    </form>
-                    </div>
+        <div class="flex">
+            <a href={{Storage::disk('s3')->url('images/'.$publicacion->archivo->nombre.'.'.$publicacion->archivo->extension)}} target="_blank"
+                class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-2 mr-2 rounded">Ver a tamaño completo</a>
+                @if (Auth::user()->id != $publicacion->usuario_id)
+                    @if (!$esta_en_coleccion)
+                        <form method="POST" action="{{ route('coleccion.store'   ) }}">
+                            @csrf
+                            <input type="hidden" name="publicacion_id" value="{{ $publicacion->id }}" />
+                            <button
+                            class="bg-fuchsia-500 hover:bg-fuchsia-700 text-white font-bold mr-2 py-2 px-2 rounded" type="submit">Añadir a tu colección</button>
+                        </form>
+                    @else
+                        <form method="POST" action="{{ route('coleccion.destroy',$publicacion->id   ) }}">
+                            @csrf
+                            @method("DELETE")
+                            <input type="hidden" name="publicacion_id" value="{{ $publicacion->id }}" />
+                            <button
+                            class="bg-fuchsia-500 hover:bg-fuchsia-700 text-white font-bold mr-2 py-2 px-2 rounded" type="submit">Quitar de tu colección</button>
+                        </form>
+                    @endif
+
                 @endif
+                @if (Auth::user()->rol == 'admin' || Auth::user()->id == $publicacion->usuario_id)
+                        <a href={{url('/publicaciones/'.$publicacion->id.'/edit')}}
+                            class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-2 mr-2 rounded">Editar</a>
+                        <form action="/publicaciones/{{ $publicacion->id }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick="return confirm('¿Estás seguro?')" class="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-2 rounded" type="submit">Borrar</button>
+                        </form>
+                        @endif
+                    </div>
             @endauth
 
         <h1 class="text-2xl pt-10">{{$datos_publicacion[0]->titulo}}</h1>
         <h1 class="text-xl pt-10">{{$datos_usuario[0]->nombre}}</h1>
-        {{-- TO DO: AVATAR, Y QUE ENLACE A SU PERFIL --}}
         <p class="py-10">{{$datos_publicacion[0]->texto}}</p>
-        {{-- <h4>Mostrar comentarios</h4> --}}
         <div class="w-1/2">
             @include('publicacion.mostrarComentarios', ['comentarios' => $publicacion->comentarios, 'publicacion_id' => $publicacion->id])
         </div>
         <hr>
-        {{-- <h4>Añadir comentario</h4> --}}
 
         <form class="w-3/4" method="POST" action="{{ route('comentarios.store'   ) }}">
             @csrf
@@ -50,7 +68,7 @@
                 <input type="hidden" name="usuario_id" value="{{ auth()->user()->id }}" />
             </div>
             <div class="flex justify-center mx-auto my-6">
-                <input type="submit" class="justify-self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded" value="Añadir comentario" />
+                <input type="submit" class="justify-self-center bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-1 px-2 border border-blue-500 rounded" value="Añadir comentario" />
             </div>
         </form>
     </div>

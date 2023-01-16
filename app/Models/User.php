@@ -73,4 +73,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comentario::class);
     }
+
+    public function colecciones()
+    {
+        return $this->hasMany(Coleccion::class);
+    }
 }

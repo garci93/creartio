@@ -12,7 +12,7 @@
     <main>
         {{ $slot }}
     </main>
-    <footer class="footer relative pt-1 bottom-0" style="background-color:#161819">
+    <footer class="footer relative pt-1 bg-slate-700 bottom-0">
             <div class="container mx-auto px-6">
                 <div class="sm:flex sm:mt-8">
                     <div class="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">
