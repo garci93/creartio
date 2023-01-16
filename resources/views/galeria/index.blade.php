@@ -17,7 +17,7 @@
                     <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span
                             class="inline-block w-1/3 md:hidden font-bold"></span>{{ $galeria->titulo }}</td>
                     <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span
-                            class="inline-block w-1/3 md:hidden font-bold"></span>{{ $galeria->user_id }}</td>
+                            class="inline-block w-1/3 md:hidden font-bold"></span>{{ $galeria->usuario_id }}</td>
                     <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
                         <span class="inline-block w-1/3 md:hidden font-bold">Acciones</span>
                         <a href={{ url('/galerias/' . $galeria->id . '/edit') }}

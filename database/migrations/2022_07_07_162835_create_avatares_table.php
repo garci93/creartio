@@ -15,7 +15,7 @@ class CreateAvataresTable extends Migration
     {
         Schema::create('avatares', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('archivo_id')->constrained('archivos')->onDelete('cascade');
             $table->timestamps();
         });

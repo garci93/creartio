@@ -30,6 +30,11 @@ class Publicacion extends Model
             return $this->hasMany(Comentario::class);
         }
 
+    public function publicaciones()
+    {
+        return $this->hasMany(Publicacion::class);
+    }
+
     public function usuario ()
     {
         return $this->hasOne(User::class, 'id', 'usuario_id');

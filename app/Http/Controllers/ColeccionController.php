@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archivo;
+use App\Models\Publicacion;
 use App\Models\Coleccion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,7 +18,7 @@ class ColeccionController extends Controller
     }
 
     public function index(){
-        $colecciones = Coleccion::paginate(10);
+        $colecciones = Coleccion::orderBy('id','desc')->simplePaginate(5);
         return view('coleccion.index',['colecciones' => $colecciones]);
     }
 
@@ -37,16 +39,57 @@ class ColeccionController extends Controller
 
     public function destroy($id){
         Coleccion::destroy($id);
-        return redirect('/colecciones')->with('success','Se ha borrado la colección correctamente.');
+        return redirect('/colecciones')->with('success','Se ha quitado esta publicación de tu colección.');
     }
 
     public function store(Request $request){
-        $coleccion = new Coleccion($request->input());
-        DB::table('colecciones')
+        $publicacion = new Publicacion($request->input());
+        $nombre_nuevo = Auth::user()->nombre . "-" . $publicacion->titulo;
+        DB::table('archivos')
             ->insert(
-                ['titulo' => $coleccion->titulo,
-                'user_id' => Auth::user()->id,
-                'created_at' => Carbon::now()]);
-        return redirect('/colecciones')->with(["mensaje" => "Colección creada",]);
+                ['nombre' => $nombre_nuevo,
+                'extension' => $request->image->extension(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),]);
+        $archivo_id = DB::table('archivos')
+            ->select('id')
+            ->where('nombre','=',$nombre_nuevo)
+            ->get();
+        app('App\Http\Controllers\ImageUploadController')->imageUploadPost($request,$nombre_nuevo);
+        DB::table('publicaciones')
+            ->insert(
+                ['titulo' => $publicacion->titulo,
+                'texto' => $publicacion->texto,
+                'usuario_id' => $publicacion->usuario_id,
+                'archivo_id' => $archivo_id[0]->id,
+                'fecha_publicacion' => Carbon::now(),
+                'fecha_ultima_edicion' => Carbon::now()]);
+        return redirect('/publicaciones')->with(["mensaje" => "Publicación creada",]);
     }
+
+    public function show($id){
+        $publicacion = Publicacion::with('archivo')->findOrFail($id);
+        $datos_publicacion = DB::table('publicaciones')
+            ->select('titulo','texto','usuario_id')
+            ->where('id','=',$publicacion->id)
+            ->get();
+        $datos_usuario = DB::table('users')
+            ->select('nombre')
+            ->where('id','=',$publicacion->usuario_id)
+            ->get();
+        $colecciones = DB::table('colecciones')
+            ->where('publicacion_id','=',$publicacion->id)
+            ->get();
+        return view('publicacion.show',['publicacion' => $publicacion,'datos_publicacion' => $datos_publicacion,'datos_usuario' => $datos_usuario, 'colecciones' => $colecciones]);
+    }
+
+    // public function store(Request $request){
+    //     $coleccion = new Coleccion($request->input());
+    //     DB::table('colecciones')
+    //         ->insert(
+    //             ['titulo' => $coleccion->titulo,
+    //             'user_id' => Auth::user()->id,
+    //             'created_at' => Carbon::now()]);
+    //     return redirect('/colecciones')->with(["mensaje" => "Colección creada",]);
+    // }
 }

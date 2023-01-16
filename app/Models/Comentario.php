@@ -25,4 +25,9 @@ class Comentario extends Model
         {
             return $this->belongsTo(User::class, 'usuario_id');
         }
+
+    public function publicacion()
+    {
+        return $this->belongsTo(Publicacion::class, 'publicacion_id');
+    }
 }

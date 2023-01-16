@@ -44,7 +44,6 @@ class PublicacionController extends Controller
 
     public function store(Request $request){
         $publicacion = new Publicacion($request->input());
-        $archivo = new Archivo($request->input());
         $nombre_nuevo = Auth::user()->nombre . "-" . $publicacion->titulo;
         DB::table('archivos')
             ->insert(

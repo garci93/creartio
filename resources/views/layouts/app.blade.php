@@ -33,10 +33,8 @@
             <div id="menu" class="hidden md:flex md:ml-auto md:items-center justify-end md:w-auto w-full order-2 md:order-1">
                 <nav class="inline justify-end">
                     @auth
-                        <a class="inline align-middle no-underline text-cyan-600 hover:text-cyan-400 box-border text-lg font-bold pt-2 pb-10 px-2 rounded"
+                        <a class="inline align-middle no-underline text-cyan-600 hover:text-cyan-400 box-border text-lg font-bold pt-2 pb-10 px-4"
                             href={{url('/publicaciones/create')}}>Nueva publicación</a>
-                        <a class="inline align-middle no-underline hover:text-black font-medium text-lg pt-2 pb-10 px-4 lg:-ml-2"
-                            href="/user/profile">Mi perfil</a>
                         <a class="inline-block pr-4" href="/profile/{{Auth::user()->nombre}}">
                             <img class="h-12 mx-auto rounded-full hover:scale-110 duration-150" src="{{Storage::disk('s3')->url('fotos-perfil/def-avatar.png')}}" alt="profile">
                         </a>

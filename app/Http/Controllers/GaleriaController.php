@@ -45,7 +45,7 @@ class GaleriaController extends Controller
         DB::table('galerias')
             ->insert(
                 ['titulo' => $galeria->titulo,
-                'user_id' => Auth::user()->id,
+                'usuario_id' => Auth::user()->id,
                 'created_at' => Carbon::now()]);
         return redirect('/galerias')->with(["mensaje" => "Galería creada",]);
     }

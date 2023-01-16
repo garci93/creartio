@@ -17,6 +17,7 @@
 
         <h1 class="text-2xl pt-10">{{$datos_publicacion[0]->titulo}}</h1>
         <h1 class="text-xl pt-10">{{$datos_usuario[0]->nombre}}</h1>
+        {{-- TO DO: AVATAR, Y QUE ENLACE A SU PERFIL --}}
         <p class="py-10">{{$datos_publicacion[0]->texto}}</p>
         {{-- <h4>Mostrar comentarios</h4> --}}
         <div class="w-1/2">

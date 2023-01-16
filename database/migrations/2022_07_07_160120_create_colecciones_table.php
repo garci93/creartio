@@ -15,9 +15,8 @@ class CreateColeccionesTable extends Migration
     {
         Schema::create('colecciones', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo', 40);
-            $table->boolean('por_defecto')->default(true);
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('publicacion_id')->constrained('publicaciones')->onDelete('cascade');
             $table->timestamps();
         });
     }

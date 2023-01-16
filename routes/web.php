@@ -1,9 +1,7 @@
 <?php
 
-use App\Http\Controllers\GaleriaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PublicacionController;
-use App\Http\Controllers\ColeccionController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ReporteController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +45,7 @@ Route::get('/', function () {
     return view('index');
 });
 Route::any('profile/{nombre}',[UsuarioController::class,'profile'])->name('profile.index');
+Route::any('coleccion/{nombre}',[UsuarioController::class,'coleccion'])->name('coleccion.index');
 
 
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
